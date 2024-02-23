@@ -62,11 +62,6 @@ public class GdxSamplerLauncher extends JFrame { //JFrame - java desktop top lev
     // == main ==
     public static void main(String[] args) {
         // must be used to run our jframe properly
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new GdxSamplerLauncher();
-            }
-        });
+        SwingUtilities.invokeLater(GdxSamplerLauncher::new);
     }
 }
