@@ -1,7 +1,7 @@
 package com.gdx.game.course;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gdx.game.course.utils.GdxUtils;
 
 public class InputListeningSample implements ApplicationListener, InputProcessor {
 
@@ -67,6 +68,7 @@ public class InputListeningSample implements ApplicationListener, InputProcessor
 
 		multiplexer.addProcessor(firstProcessor);
 		multiplexer.addProcessor(secondProcessor);
+		multiplexer.addProcessor(this);
 		Gdx.input.setInputProcessor(multiplexer);
 	}
 
@@ -78,8 +80,7 @@ public class InputListeningSample implements ApplicationListener, InputProcessor
 	@Override
 	public void render() {
 		// clear screen
-		Gdx.gl.glClearColor(0, 0, 0, 1.0f);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		GdxUtils.clearScreen(Color.BLACK);
 
 		batch.setProjectionMatrix(camera.combined); // tell batch the position and zoom of camera
 		batch.begin();
