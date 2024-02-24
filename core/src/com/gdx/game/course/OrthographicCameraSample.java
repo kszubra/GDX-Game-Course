@@ -37,6 +37,8 @@ public class OrthographicCameraSample extends SampleBase {
         spriteBatch = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("raw/level-bg.png"));
 
+        Gdx.input.setInputProcessor(this);
+
     }
 
     @Override
@@ -80,6 +82,20 @@ public class OrthographicCameraSample extends SampleBase {
         }
 
         camera.update(); // need to update camera after every change of position or zoom to recalculate everything
+
+    }
+
+    @Override
+    public boolean scrolled(float amountX, float amountY) {
+        log.debug(String.format("Scroll: amountX: %s, amountY: %s", amountX, amountY));
+        float deltaTime = Gdx.graphics.getDeltaTime(); // time passed between 2 frames
+        if(amountY < 0) { //scroll down
+            camera.zoom -= CAMERA_ZOOM_SPEED * deltaTime;
+        } else if (amountY > 0){ //scroll up
+            camera.zoom += CAMERA_ZOOM_SPEED * deltaTime;
+        }
+        camera.update();
+        return false;
 
     }
 
