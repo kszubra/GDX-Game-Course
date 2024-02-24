@@ -1,7 +1,6 @@
 package com.gdx.game.course;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -11,9 +10,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gdx.game.course.common.SampleBase;
+import com.gdx.game.course.common.SampleInfo;
 import com.gdx.game.course.utils.GdxUtils;
 
-public class InputPollingSample implements ApplicationListener {
+public class InputPollingSample extends SampleBase {
+	public static final SampleInfo SAMPLE_INFO = new SampleInfo(InputPollingSample.class);
 
 	private OrthographicCamera camera;
 	private Viewport viewport;

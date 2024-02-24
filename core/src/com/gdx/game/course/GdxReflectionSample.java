@@ -1,7 +1,6 @@
 package com.gdx.game.course;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -14,10 +13,13 @@ import com.badlogic.gdx.utils.reflect.Field;
 import com.badlogic.gdx.utils.reflect.Method;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gdx.game.course.common.SampleBase;
+import com.gdx.game.course.common.SampleInfo;
 
 import java.util.Arrays;
 
-public class GdxReflectionSample implements ApplicationListener {
+public class GdxReflectionSample extends SampleBase {
+	public static final SampleInfo SAMPLE_INFO = new SampleInfo(GdxReflectionSample.class);
 
 	private static final Logger log = new Logger(ApplicationListenerSample.class.getName(), Logger.DEBUG);
 	private OrthographicCamera camera;

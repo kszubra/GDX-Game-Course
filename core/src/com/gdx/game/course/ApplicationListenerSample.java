@@ -1,17 +1,15 @@
 package com.gdx.game.course;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Logger;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.gdx.game.course.common.SampleBase;
+import com.gdx.game.course.common.SampleInfo;
 
-public class ApplicationListenerSample implements ApplicationListener {
+public class ApplicationListenerSample extends SampleBase {
 	private static final Logger log = new Logger(ApplicationListenerSample.class.getName(), Logger.DEBUG);
 	private boolean renderInterrupted = true;
+	public static final SampleInfo SAMPLE_INFO = new SampleInfo(ApplicationListenerSample.class);
 
 	@Override
 	public void create() {
