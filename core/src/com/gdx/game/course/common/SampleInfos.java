@@ -12,7 +12,8 @@ public class SampleInfos {
             GdxReflectionSample.SAMPLE_INFO,
             InputListeningSample.SAMPLE_INFO,
             InputPollingSample.SAMPLE_INFO,
-            OrthographicCameraSample.SAMPLE_INFO
+            OrthographicCameraSample.SAMPLE_INFO,
+            ViewportSample.SAMPLE_INFO
     );
 
     public static List<String> getSampleNames() {
