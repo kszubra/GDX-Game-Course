@@ -1,4 +1,4 @@
-package com.gdx.game.course;
+package com.gdx.game.course.introduction;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
@@ -13,9 +13,9 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.gdx.game.course.common.SampleBase;
-import com.gdx.game.course.common.SampleInfo;
-import com.gdx.game.course.utils.GdxUtils;
+import com.gdx.game.course.introduction.common.SampleBase;
+import com.gdx.game.course.introduction.common.SampleInfo;
+import com.gdx.game.course.introduction.utils.GdxUtils;
 
 public class InputListeningSample extends SampleBase {
 	public static final SampleInfo SAMPLE_INFO = new SampleInfo(InputListeningSample.class);
@@ -39,8 +39,8 @@ public class InputListeningSample extends SampleBase {
 		batch = new SpriteBatch();
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 		parameter.size = 24;
-		font = new FreeTypeFontGenerator(Gdx.files.internal("fonts/data-unifon.ttf")).generateFont(parameter);
-		font2 = new BitmapFont(Gdx.files.internal("fonts/oswald_black_48.fnt"));
+		font = new FreeTypeFontGenerator(Gdx.files.internal("introduction/fonts/data-unifon.ttf")).generateFont(parameter);
+		font2 = new BitmapFont(Gdx.files.internal("introduction/fonts/oswald_black_48.fnt"));
 
 //		Gdx.input.setInputProcessor(this);
 

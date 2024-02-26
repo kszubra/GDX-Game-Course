@@ -1,10 +1,10 @@
-package com.gdx.game.course;
+package com.gdx.game.course.introduction;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.gdx.game.course.common.SampleBase;
-import com.gdx.game.course.common.SampleInfo;
+import com.gdx.game.course.introduction.common.SampleBase;
+import com.gdx.game.course.introduction.common.SampleInfo;
 
 public class GdxGeneratedSample extends SampleBase {
 	public static final SampleInfo SAMPLE_INFO = new SampleInfo(GdxGeneratedSample.class);

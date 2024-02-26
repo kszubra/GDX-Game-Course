@@ -1,10 +1,10 @@
-package com.gdx.game.course;
+package com.gdx.game.course.introduction;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Logger;
-import com.gdx.game.course.common.SampleBase;
-import com.gdx.game.course.common.SampleInfo;
+import com.gdx.game.course.introduction.common.SampleBase;
+import com.gdx.game.course.introduction.common.SampleInfo;
 
 public class ApplicationListenerSample extends SampleBase {
 	private static final Logger log = new Logger(ApplicationListenerSample.class.getName(), Logger.DEBUG);

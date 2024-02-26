@@ -1,22 +1,27 @@
-package com.gdx.game.course;
+package com.gdx.game.course.introduction;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.utils.Logger;
+import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.badlogic.gdx.utils.reflect.Field;
+import com.badlogic.gdx.utils.reflect.Method;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.gdx.game.course.common.SampleBase;
-import com.gdx.game.course.common.SampleInfo;
-import com.gdx.game.course.utils.GdxUtils;
+import com.gdx.game.course.introduction.common.SampleBase;
+import com.gdx.game.course.introduction.common.SampleInfo;
 
-public class InputPollingSample extends SampleBase {
-	public static final SampleInfo SAMPLE_INFO = new SampleInfo(InputPollingSample.class);
+import java.util.Arrays;
 
+public class GdxReflectionSample extends SampleBase {
+	public static final SampleInfo SAMPLE_INFO = new SampleInfo(GdxReflectionSample.class);
+
+	private static final Logger log = new Logger(ApplicationListenerSample.class.getName(), Logger.DEBUG);
 	private OrthographicCamera camera;
 	private Viewport viewport;
 	private SpriteBatch batch;
@@ -32,8 +37,10 @@ public class InputPollingSample extends SampleBase {
 		batch = new SpriteBatch();
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 		parameter.size = 24;
-		font = new FreeTypeFontGenerator(Gdx.files.internal("fonts/data-unifon.ttf")).generateFont(parameter);
-		font2 = new BitmapFont(Gdx.files.internal("fonts/oswald_black_48.fnt"));
+		font = new FreeTypeFontGenerator(Gdx.files.internal("introduction/fonts/data-unifon.ttf")).generateFont(parameter);
+		font2 = new BitmapFont(Gdx.files.internal("introduction/fonts/oswald_black_48.fnt"));
+
+		debugReflection(GdxReflectionSample.class);
 	}
 
 	@Override
@@ -43,13 +50,21 @@ public class InputPollingSample extends SampleBase {
 
 	@Override
 	public void render() {
-		// clear screen
-		GdxUtils.clearScreen(Color.BLACK);
+	}
 
-		batch.setProjectionMatrix(camera.combined); // tell batch the position and zoom of camera
-		batch.begin();
-		draw();
-		batch.end();
+	private static void debugReflection(Class<?> clazz) {
+		Field[] fields = ClassReflection.getDeclaredFields(clazz);
+		Method[] methods = ClassReflection.getDeclaredMethods(clazz);
+
+		log.debug("== debug reflection class== " + clazz.getName());
+		log.debug("fields count: " + fields.length);
+		for(Field field : fields) {
+			log.debug("name: " + field.getName() + ", type: " + field.getType());
+		}
+		log.debug("methods count: " + methods.length);
+		for(Method method : methods) {
+			log.debug("name: " + method.getName() + ", parameterTypes: " + Arrays.asList(method.getParameterTypes()));
+		}
 	}
 
 	private void draw() {

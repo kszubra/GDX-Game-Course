@@ -1,6 +1,6 @@
-package com.gdx.game.course.common;
+package com.gdx.game.course.introduction.common;
 
-import com.gdx.game.course.*;
+import com.gdx.game.course.introduction.*;
 
 import java.util.*;
 

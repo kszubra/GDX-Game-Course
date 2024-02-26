@@ -1,4 +1,4 @@
-package com.gdx.game.course.common;
+package com.gdx.game.course.introduction.common;
 
 public class SampleInfo {
 

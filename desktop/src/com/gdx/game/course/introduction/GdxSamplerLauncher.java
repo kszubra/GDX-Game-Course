@@ -1,9 +1,9 @@
-package com.gdx.game.course;
+package com.gdx.game.course.introduction;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglAWTCanvas;
-import com.gdx.game.course.common.SampleFactory;
-import com.gdx.game.course.common.SampleInfos;
+import com.gdx.game.course.introduction.common.SampleFactory;
+import com.gdx.game.course.introduction.common.SampleInfos;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package com.gdx.game.course;
+package com.gdx.game.course.introduction;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.gdx.game.course.common.SampleBase;
-import com.gdx.game.course.common.SampleInfo;
-import com.gdx.game.course.utils.GdxUtils;
+import com.gdx.game.course.introduction.common.SampleBase;
+import com.gdx.game.course.introduction.common.SampleInfo;
+import com.gdx.game.course.introduction.utils.GdxUtils;
 
 public class OrthographicCameraSample extends SampleBase {
 
@@ -35,7 +35,7 @@ public class OrthographicCameraSample extends SampleBase {
         camera = new OrthographicCamera();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         spriteBatch = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("raw/level-bg.png"));
+        texture = new Texture(Gdx.files.internal("introduction/raw/level-bg.png"));
 
         Gdx.input.setInputProcessor(this);
 
