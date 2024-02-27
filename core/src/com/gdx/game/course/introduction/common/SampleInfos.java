@@ -15,7 +15,8 @@ public class SampleInfos {
             OrthographicCameraSample.SAMPLE_INFO,
             ViewportSample.SAMPLE_INFO,
             SpriteBatchSample.SAMPLE_INFO,
-            ShapeRendererSample.SAMPLE_INFO
+            ShapeRendererSample.SAMPLE_INFO,
+            GifDisplaySample.SAMPLE_INFO
     );
 
     public static List<String> getSampleNames() {

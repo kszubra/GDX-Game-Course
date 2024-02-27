@@ -45,7 +45,7 @@ public class GdxSamplerLauncher extends JFrame { //JFrame - java desktop top lev
         setTitle(GdxSamplerLauncher.class.getSimpleName());
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
         setSize(WIDTH, HEIGHT);
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //to close the application after pressing X
 
         // tell window (jframe) to resize and layout our components
