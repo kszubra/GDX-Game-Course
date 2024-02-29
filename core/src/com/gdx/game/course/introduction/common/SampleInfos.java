@@ -16,7 +16,8 @@ public class SampleInfos {
             ViewportSample.SAMPLE_INFO,
             SpriteBatchSample.SAMPLE_INFO,
             ShapeRendererSample.SAMPLE_INFO,
-            GifDisplaySample.SAMPLE_INFO
+            GifDisplaySample.SAMPLE_INFO,
+            BitmapFontSample.SAMPLE_INFO
     );
 
     public static List<String> getSampleNames() {
