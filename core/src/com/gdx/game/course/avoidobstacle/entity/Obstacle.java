@@ -8,7 +8,7 @@ import com.gdx.game.course.avoidobstacle.config.GameConfig;
 public class Obstacle extends GameObjectBase implements Pool.Poolable {
 
     private float ySpeed = GameConfig.MEDIUM_OBSTACLE_SPEED;
-    private boolean hit;
+    private boolean hit; //mark as hit to avoid detecting once-happened collision every frame it collides
 
     public Obstacle() {
         super(GameConfig.OBSTACLE_BOUNDS_RADIUS);

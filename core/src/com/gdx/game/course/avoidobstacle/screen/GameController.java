@@ -26,7 +26,7 @@ public class GameController {
     private float scoreTimer;
     private int lives = GameConfig.LIVES_START;
     private int score;
-    private int displayScore;
+    private int displayScore; //to samo co score, ale płynne wyświetlanie
     private DifficultyLevel difficultyLevel = DifficultyLevel.MEDIUM;
     private Pool<Obstacle> obstaclePool;
     private final float startPlayerX = (GameConfig.WORLD_WIDTH - GameConfig.PLAYER_SIZE) / 2f;
@@ -188,9 +188,9 @@ public class GameController {
     private void updateScore(float delta) {
         scoreTimer += delta;
 
-        if (scoreTimer >= GameConfig.SCORE_MAX_TIME) {
+        if (scoreTimer >= GameConfig.SCORE_MAX_TIME) { //interval time
             score += MathUtils.random(1, 5);
-            scoreTimer = 0.0f;
+            scoreTimer = 0.0f; //reset timer
         }
     }
 
@@ -198,7 +198,7 @@ public class GameController {
         if (displayScore < score) {
             displayScore = Math.min(
                     score,
-                    displayScore + (int) (40 * delta)
+                    displayScore + (int) (40 * delta) //to increase the displayed value by frame to avoid jumps. Lower number -> smaller jump
             );
         }
     }
