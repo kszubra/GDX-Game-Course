@@ -115,7 +115,8 @@ public class GameRenderer implements Disposable {
 
     // == private methods ==
     private void renderGamePlay() {
-        viewport.apply();
+        viewport.apply(); //whenever we have multiple viewports with different sizes we need to call
+        // apply() before drawing so that openGL viewport is set to out viewport
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
