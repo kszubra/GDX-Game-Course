@@ -3,9 +3,7 @@ package com.gdx.game.course.avoidobstacle.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -21,6 +19,7 @@ import com.gdx.game.course.avoidobstacle.entity.Player;
 import com.gdx.game.course.avoidobstacle.util.GdxUtils;
 import com.gdx.game.course.avoidobstacle.util.ViewportUtils;
 import com.gdx.game.course.avoidobstacle.util.debug.DebugCameraController;
+import com.gdx.game.course.introduction.utils.GifDecoder;
 
 public class GameRenderer implements Disposable {
 
@@ -40,6 +39,9 @@ public class GameRenderer implements Disposable {
     private Texture playerTexture;
     private Texture obstacleTexture;
     private Texture backgroundTexture;
+
+    Animation<TextureRegion> animation;
+    float elapsed;
 
     // == constructors ==
     public GameRenderer(GameController controller) {
@@ -65,6 +67,7 @@ public class GameRenderer implements Disposable {
         playerTexture = new Texture(Gdx.files.internal("avoidobstacle/gameplay/player.png"));
         obstacleTexture = new Texture(Gdx.files.internal("avoidobstacle/gameplay/obstacle.png"));
         backgroundTexture = new Texture(Gdx.files.internal("avoidobstacle/gameplay/background.png"));
+        animation = (GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("avoidobstacle/gameplay/blaidd.gif").read()));
     }
 
     // == public methods ==
@@ -121,11 +124,13 @@ public class GameRenderer implements Disposable {
         batch.begin();
 
         // draw background
-        Background background = controller.getBackground();
-        batch.draw(backgroundTexture,
-                background.getX(), background.getY(),
-                background.getWidth(), background.getHeight()
-        );
+        elapsed += Gdx.graphics.getDeltaTime();
+        batch.draw(animation.getKeyFrame(elapsed), 0f, 0f, GameConfig.WORLD_WIDTH, GameConfig.WORLD_HEIGHT);
+//        Background background = controller.getBackground();
+//        batch.draw(backgroundTexture,
+//                background.getX(), background.getY(),
+//                background.getWidth(), background.getHeight()
+//        );
 
         // draw player
         Player player = controller.getPlayer();
