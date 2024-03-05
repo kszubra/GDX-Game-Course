@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 
 public abstract class GameObjectBase {
-
     private float x;
     private float y;
     private float width = 1;
@@ -62,7 +61,9 @@ public abstract class GameObjectBase {
     public void updateBounds() {
         float halfWidth = width / 2f;
         float halfHeight = height / 2f;
-        bounds.setPosition(x + halfWidth, y + halfHeight);
+        bounds.setPosition(x + halfWidth, y + halfHeight); //updating bounds to stay aligned with textures.
+        // shape renderer draws circle at 00 meaning middle at 00, texture at 00 means bottom left corner at 00 -> moving bounds
+        // up and right to have bottom left corner at 00 too
     }
 
     public Circle getBounds() {
