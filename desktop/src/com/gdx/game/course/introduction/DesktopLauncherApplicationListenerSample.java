@@ -2,7 +2,6 @@ package com.gdx.game.course.introduction;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.gdx.game.course.introduction.ApplicationListenerSample;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncherApplicationListenerSample {
