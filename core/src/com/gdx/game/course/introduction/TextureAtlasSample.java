@@ -23,7 +23,7 @@ public class TextureAtlasSample extends SampleBase {
 
     public static final SampleInfo SAMPLE_INFO = new SampleInfo(TextureAtlasSample.class);
 
-    private static final String ATLAS = "core/assets/images/atlasSample.atlas";
+    private static final String ATLAS = "core/introduction/assets/images/atlasSample.atlas";
     private static final String BACKGROUND_BLUE = "background-blue"; // region name in atlas
     private static final String GREEN_CIRCLE = "circle-green"; // region name in atlas
     private static final String RED_CIRCLE = "circle-red"; // region name in atlas

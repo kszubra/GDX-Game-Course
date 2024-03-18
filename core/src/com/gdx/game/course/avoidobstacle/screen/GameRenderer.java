@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gdx.game.course.avoidobstacle.assets.AssetDescriptors;
 import com.gdx.game.course.avoidobstacle.assets.AssetPaths;
+import com.gdx.game.course.avoidobstacle.assets.RegionNames;
 import com.gdx.game.course.avoidobstacle.config.GameConfig;
 import com.gdx.game.course.avoidobstacle.entity.Background;
 import com.gdx.game.course.avoidobstacle.entity.Obstacle;
@@ -39,9 +40,9 @@ public class GameRenderer implements Disposable {
     private final GlyphLayout layout = new GlyphLayout();
     private DebugCameraController debugCameraController;
     private final GameController controller;
-    private Texture playerTexture;
-    private Texture obstacleTexture;
-    private Texture backgroundTexture;
+    private TextureRegion playerTexture;
+    private TextureRegion obstacleTexture;
+    private TextureRegion backgroundTexture;
 
     Animation<TextureRegion> animation;
     float elapsed;
@@ -67,10 +68,11 @@ public class GameRenderer implements Disposable {
         // create debug camera controller
         debugCameraController = new DebugCameraController();
         debugCameraController.setStartPosition(GameConfig.WORLD_CENTER_X, GameConfig.WORLD_CENTER_Y);
+        TextureAtlas gameAtlas = assetManager.get(AssetDescriptors.GAME_PLAY);
 
-        playerTexture = assetManager.get(AssetDescriptors.PLAYER);
-        obstacleTexture = assetManager.get(AssetDescriptors.OBSTACLE);
-        backgroundTexture = assetManager.get(AssetDescriptors.BACKGROUND);;
+        playerTexture = gameAtlas.findRegion(RegionNames.PLAYER);
+        obstacleTexture = gameAtlas.findRegion(RegionNames.OBSTACLE);
+        backgroundTexture = gameAtlas.findRegion(RegionNames.BACKGROUND);;
         animation = (GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("avoidobstacle/gameplay/blaidd.gif").read()));
     }
 
