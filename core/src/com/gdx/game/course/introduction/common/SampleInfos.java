@@ -19,7 +19,8 @@ public class SampleInfos {
             GifDisplaySample.SAMPLE_INFO,
             BitmapFontSample.SAMPLE_INFO,
             PoolingSample.SAMPLE_INFO,
-            AssetManagerSample.SAMPLE_INFO
+            AssetManagerSample.SAMPLE_INFO,
+            TextureAtlasSample.SAMPLE_INFO
     );
 
     public static List<String> getSampleNames() {
