@@ -1,9 +1,8 @@
-package com.gdx.game.course.avoidobstacle.screen;
+package com.gdx.game.course.avoidobstacle.screen.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
@@ -13,10 +12,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gdx.game.course.avoidobstacle.assets.AssetDescriptors;
-import com.gdx.game.course.avoidobstacle.assets.AssetPaths;
 import com.gdx.game.course.avoidobstacle.assets.RegionNames;
 import com.gdx.game.course.avoidobstacle.config.GameConfig;
-import com.gdx.game.course.avoidobstacle.entity.Background;
 import com.gdx.game.course.avoidobstacle.entity.Obstacle;
 import com.gdx.game.course.avoidobstacle.entity.Player;
 import com.gdx.game.course.avoidobstacle.util.GdxUtils;
