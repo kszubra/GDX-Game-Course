@@ -2,11 +2,16 @@ package com.gdx.game.course.avoidobstacle.screen.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import com.gdx.game.course.avoidobstacle.ObstacleAvoidGame;
+import com.gdx.game.course.avoidobstacle.assets.AssetDescriptors;
+import com.gdx.game.course.avoidobstacle.common.GameManager;
 import com.gdx.game.course.avoidobstacle.config.DifficultyLevel;
 import com.gdx.game.course.avoidobstacle.config.GameConfig;
 import com.gdx.game.course.avoidobstacle.entity.Background;
@@ -26,15 +31,21 @@ public class GameController {
     private float scoreTimer;
     private int lives = GameConfig.LIVES_START;
     private int score;
-    private int displayScore; //to samo co score, ale płynne wyświetlanie
-    private DifficultyLevel difficultyLevel = DifficultyLevel.EASY;
+    private int displayScore;
     private Pool<Obstacle> obstaclePool;
+    private Sound hit;
+
+    private final ObstacleAvoidGame game;
+    private final AssetManager assetManager;
+
     private final float startPlayerX = (GameConfig.WORLD_WIDTH - GameConfig.PLAYER_SIZE) / 2f;
     private final float startPlayerY = 1 - GameConfig.PLAYER_SIZE / 2f;
 
 
     // == constructors ==
-    public GameController() {
+    public GameController(ObstacleAvoidGame game) {
+        this.game = game;
+        assetManager = game.getAssetManager();
         init();
     }
 
@@ -53,6 +64,8 @@ public class GameController {
         background = new Background();
         background.setPosition(0, 0);
         background.setSize(GameConfig.WORLD_WIDTH, GameConfig.WORLD_HEIGHT);
+
+        hit = assetManager.get(AssetDescriptors.HIT_SOUND);
     }
 
     // == public methods ==
@@ -72,6 +85,7 @@ public class GameController {
 
             if (isGameOver()) {
                 log.debug("Game Over!!!");
+                GameManager.INSTANCE.updateHighScore(score);
             } else {
                 restart();
             }
@@ -113,6 +127,7 @@ public class GameController {
     private boolean isPlayerCollidingWithObstacle() {
         for (Obstacle obstacle : obstacles) {
             if (obstacle.isNotHit() && obstacle.isPlayerColliding(player)) {
+                hit.play();
                 return true;
             }
         }
@@ -164,6 +179,7 @@ public class GameController {
             float obstacleY = GameConfig.WORLD_HEIGHT; //on world top
 
             Obstacle obstacle = obstaclePool.obtain();
+            DifficultyLevel difficultyLevel = GameManager.INSTANCE.getDifficultyLevel();
             obstacle.setYSpeed(difficultyLevel.getObstacleSpeed());
             obstacle.setPosition(obstacleX, obstacleY);
 

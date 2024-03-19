@@ -13,6 +13,7 @@ import com.gdx.game.course.avoidobstacle.ObstacleAvoidGame;
 import com.gdx.game.course.avoidobstacle.assets.AssetDescriptors;
 import com.gdx.game.course.avoidobstacle.config.GameConfig;
 import com.gdx.game.course.avoidobstacle.screen.game.GameScreen;
+import com.gdx.game.course.avoidobstacle.screen.menu.MenuScreen;
 import com.gdx.game.course.avoidobstacle.util.GdxUtils;
 
 public class LoadingScreen extends ScreenAdapter {
@@ -51,6 +52,8 @@ public class LoadingScreen extends ScreenAdapter {
 
         assetManager.load(AssetDescriptors.FONT);
         assetManager.load(AssetDescriptors.GAME_PLAY);
+        assetManager.load(AssetDescriptors.UI_SKIN);
+        assetManager.load(AssetDescriptors.HIT_SOUND);
     }
 
     @Override
@@ -68,7 +71,7 @@ public class LoadingScreen extends ScreenAdapter {
         renderer.end();
 
         if(changeScreen) {
-            game.setScreen(new GameScreen(game));
+            game.setScreen(new MenuScreen(game));
         }
     }
 

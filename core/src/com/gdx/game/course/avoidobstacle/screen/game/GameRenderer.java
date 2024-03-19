@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gdx.game.course.avoidobstacle.assets.AssetDescriptors;
 import com.gdx.game.course.avoidobstacle.assets.RegionNames;
 import com.gdx.game.course.avoidobstacle.config.GameConfig;
+import com.gdx.game.course.avoidobstacle.entity.Background;
 import com.gdx.game.course.avoidobstacle.entity.Obstacle;
 import com.gdx.game.course.avoidobstacle.entity.Player;
 import com.gdx.game.course.avoidobstacle.util.GdxUtils;
@@ -22,9 +23,6 @@ import com.gdx.game.course.avoidobstacle.util.debug.DebugCameraController;
 import com.gdx.game.course.introduction.utils.GifDecoder;
 
 public class GameRenderer implements Disposable {
-    private final AssetManager assetManager;
-
-    // == attributes ==
     private OrthographicCamera camera;
     private Viewport viewport;
     private ShapeRenderer renderer;
@@ -32,22 +30,25 @@ public class GameRenderer implements Disposable {
     private OrthographicCamera hudCamera;
     private Viewport hudViewport;
 
-    private SpriteBatch batch;
     private BitmapFont font;
     private final GlyphLayout layout = new GlyphLayout();
     private DebugCameraController debugCameraController;
     private final GameController controller;
-    private TextureRegion playerTexture;
-    private TextureRegion obstacleTexture;
-    private TextureRegion backgroundTexture;
+    private final AssetManager assetManager;
+    private final SpriteBatch batch;
 
-    Animation<TextureRegion> animation;
+    private TextureRegion playerRegion;
+    private TextureRegion obstacleRegion;
+    private TextureRegion backgroundRegion;
+
     float elapsed;
+    Animation<TextureRegion> animation;
 
     // == constructors ==
-    public GameRenderer(AssetManager assetManager, GameController controller) {
-        this.controller = controller;
+    public GameRenderer(SpriteBatch batch, AssetManager assetManager, GameController controller) {
+        this.batch = batch;
         this.assetManager = assetManager;
+        this.controller = controller;
         init();
     }
 
@@ -59,17 +60,18 @@ public class GameRenderer implements Disposable {
 
         hudCamera = new OrthographicCamera();
         hudViewport = new FitViewport(GameConfig.HUD_WIDTH, GameConfig.HUD_HEIGHT, hudCamera);
-        batch = new SpriteBatch();
         font = assetManager.get(AssetDescriptors.FONT);
+
 
         // create debug camera controller
         debugCameraController = new DebugCameraController();
         debugCameraController.setStartPosition(GameConfig.WORLD_CENTER_X, GameConfig.WORLD_CENTER_Y);
-        TextureAtlas gameAtlas = assetManager.get(AssetDescriptors.GAME_PLAY);
 
-        playerTexture = gameAtlas.findRegion(RegionNames.PLAYER);
-        obstacleTexture = gameAtlas.findRegion(RegionNames.OBSTACLE);
-        backgroundTexture = gameAtlas.findRegion(RegionNames.BACKGROUND);;
+        TextureAtlas gamePlayAtlas = assetManager.get(AssetDescriptors.GAME_PLAY);
+
+        playerRegion = gamePlayAtlas.findRegion(RegionNames.PLAYER);
+        obstacleRegion = gamePlayAtlas.findRegion(RegionNames.OBSTACLE);
+        backgroundRegion = gamePlayAtlas.findRegion(RegionNames.BACKGROUND);
         animation = (GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("avoidobstacle/gameplay/blaidd.gif").read()));
     }
 
@@ -117,30 +119,29 @@ public class GameRenderer implements Disposable {
 
     // == private methods ==
     private void renderGamePlay() {
-        viewport.apply(); //whenever we have multiple viewports with different sizes we need to call
-        // apply() before drawing so that openGL viewport is set to out viewport
+//        elapsed += Gdx.graphics.getDeltaTime();
+//        batch.draw(animation.getKeyFrame(elapsed), 0f, 0f, GameConfig.WORLD_WIDTH, GameConfig.WORLD_HEIGHT);
+        viewport.apply();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
         // draw background
-        elapsed += Gdx.graphics.getDeltaTime();
-        batch.draw(animation.getKeyFrame(elapsed), 0f, 0f, GameConfig.WORLD_WIDTH, GameConfig.WORLD_HEIGHT);
-//        Background background = controller.getBackground();
-//        batch.draw(backgroundTexture,
-//                background.getX(), background.getY(),
-//                background.getWidth(), background.getHeight()
-//        );
+        Background background = controller.getBackground();
+        batch.draw(backgroundRegion,
+                background.getX(), background.getY(),
+                background.getWidth(), background.getHeight()
+        );
 
         // draw player
         Player player = controller.getPlayer();
-        batch.draw(playerTexture,
+        batch.draw(playerRegion,
                 player.getX(), player.getY(),
                 player.getWidth(), player.getHeight()
         );
 
         // draw obstacles
         for (Obstacle obstacle : controller.getObstacles()) {
-            batch.draw(obstacleTexture,
+            batch.draw(obstacleRegion,
                     obstacle.getX(), obstacle.getY(),
                     obstacle.getWidth(), obstacle.getHeight()
             );

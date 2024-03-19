@@ -15,5 +15,17 @@ public enum DifficultyLevel {
         return obstacleSpeed;
     }
 
+    public boolean isEasy() {
+        return this == EASY;
+    }
+
+    public boolean isMedium() {
+        return this == MEDIUM;
+    }
+
+    public boolean isHard() {
+        return this == HARD;
+    }
+
 
 }

@@ -20,6 +20,12 @@ public class AssetPacker {
                 ASSETS_PATH + "/gameplay",
                 "gameplay"
         );
+        TexturePacker.process(setting,
+                RAW_ASSETS_PATH + "/skin",
+                ASSETS_PATH + "/ui",
+                "uiskin"
+        );
+
     }
 
 }

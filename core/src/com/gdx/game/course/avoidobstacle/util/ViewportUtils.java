@@ -10,15 +10,22 @@ import java.util.Objects;
 public class ViewportUtils {
 
     private static final Logger log = new Logger(ViewportUtils.class.getName(), Logger.DEBUG);
+
     private static final int DEFAULT_CELL_SIZE = 1;
 
     public static void drawGrid(Viewport viewport, ShapeRenderer renderer) {
         drawGrid(viewport, renderer, DEFAULT_CELL_SIZE);
     }
 
-    public static void drawGrid(Viewport viewport, ShapeRenderer renderer, int cellSize) { // cell size, by default 1 world unit
-        assert Objects.nonNull(viewport) : "Viewport can not be null";
-        assert Objects.nonNull(renderer) : "Renderer can not be null";
+    public static void drawGrid(Viewport viewport, ShapeRenderer renderer, int cellSize) {
+        // validate parameters/arguments
+        if (viewport == null) {
+            throw new IllegalArgumentException("viewport param is required.");
+        }
+
+        if (renderer == null) {
+            throw new IllegalArgumentException("renderer param is required.");
+        }
 
         if (cellSize < DEFAULT_CELL_SIZE) {
             cellSize = DEFAULT_CELL_SIZE;
@@ -36,23 +43,23 @@ public class ViewportUtils {
         renderer.begin(ShapeRenderer.ShapeType.Line);
         renderer.setColor(Color.WHITE);
 
-        // vertical lines
+        // draw vertical lines
         for (int x = -doubleWorldWidth; x < doubleWorldWidth; x += cellSize) {
             renderer.line(x, -doubleWorldHeight, x, doubleWorldHeight);
         }
 
-        // horizontal lines
+        // draw horizontal lines
         for (int y = -doubleWorldHeight; y < doubleWorldHeight; y += cellSize) {
             renderer.line(-doubleWorldWidth, y, doubleWorldWidth, y);
         }
 
-        // axis lines
+        // draw x-y axis lines
         renderer.setColor(Color.RED);
         renderer.line(0, -doubleWorldHeight, 0, doubleWorldHeight);
         renderer.line(-doubleWorldWidth, 0, doubleWorldWidth, 0);
 
-        // world bounds
-        renderer.setColor(Color.ORANGE);
+        // draw world bounds
+        renderer.setColor(Color.GREEN);
         renderer.line(0, worldHeight, worldWidth, worldHeight);
         renderer.line(worldWidth, 0, worldWidth, worldHeight);
 
@@ -62,7 +69,9 @@ public class ViewportUtils {
     }
 
     public static void debugPixelPerUnit(Viewport viewport) {
-        assert Objects.nonNull(viewport) : "Viewport can not be null";
+        if (viewport == null) {
+            throw new IllegalArgumentException("viewport param is required.");
+        }
 
         float screenWidth = viewport.getScreenWidth();
         float screenHeight = viewport.getScreenHeight();
@@ -74,7 +83,7 @@ public class ViewportUtils {
         float xPPU = screenWidth / worldWidth;
         float yPPU = screenHeight / worldHeight;
 
-        log.debug(String.format("x PPU: %s, yPPU: %s", xPPU, yPPU));
+        log.debug("x PPU= " + xPPU + " yPPU= " + yPPU);
     }
 
     private ViewportUtils() {
