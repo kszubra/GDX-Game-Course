@@ -169,14 +169,14 @@ public class GameController {
     }
 
     private void createNewObstacle(float delta) {
-        obstacleTimer += delta; //measures time for obstacle spawning
+        obstacleTimer += delta;
 
         if (obstacleTimer >= GameConfig.OBSTACLE_SPAWN_TIME) {
             float min = 0;
             float max = GameConfig.WORLD_WIDTH - GameConfig.OBSTACLE_SIZE;
 
-            float obstacleX = MathUtils.random(min, max); //anywhere on X axis
-            float obstacleY = GameConfig.WORLD_HEIGHT; //on world top
+            float obstacleX = MathUtils.random(min, max);
+            float obstacleY = GameConfig.WORLD_HEIGHT;
 
             Obstacle obstacle = obstaclePool.obtain();
             DifficultyLevel difficultyLevel = GameManager.INSTANCE.getDifficultyLevel();
@@ -204,9 +204,9 @@ public class GameController {
     private void updateScore(float delta) {
         scoreTimer += delta;
 
-        if (scoreTimer >= GameConfig.SCORE_MAX_TIME) { //interval time
+        if (scoreTimer >= GameConfig.SCORE_MAX_TIME) {
             score += MathUtils.random(1, 5);
-            scoreTimer = 0.0f; //reset timer
+            scoreTimer = 0.0f;
         }
     }
 
@@ -214,7 +214,7 @@ public class GameController {
         if (displayScore < score) {
             displayScore = Math.min(
                     score,
-                    displayScore + (int) (60 * delta) //to increase the displayed value by frame to avoid jumps. Lower number -> smaller jump
+                    displayScore + (int) (60 * delta)
             );
         }
     }

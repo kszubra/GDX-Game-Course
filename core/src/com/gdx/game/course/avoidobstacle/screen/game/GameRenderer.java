@@ -23,6 +23,8 @@ import com.gdx.game.course.avoidobstacle.util.debug.DebugCameraController;
 import com.gdx.game.course.introduction.utils.GifDecoder;
 
 public class GameRenderer implements Disposable {
+
+    // == attributes ==
     private OrthographicCamera camera;
     private Viewport viewport;
     private ShapeRenderer renderer;
@@ -40,9 +42,6 @@ public class GameRenderer implements Disposable {
     private TextureRegion playerRegion;
     private TextureRegion obstacleRegion;
     private TextureRegion backgroundRegion;
-
-    float elapsed;
-    Animation<TextureRegion> animation;
 
     // == constructors ==
     public GameRenderer(SpriteBatch batch, AssetManager assetManager, GameController controller) {
@@ -72,7 +71,6 @@ public class GameRenderer implements Disposable {
         playerRegion = gamePlayAtlas.findRegion(RegionNames.PLAYER);
         obstacleRegion = gamePlayAtlas.findRegion(RegionNames.OBSTACLE);
         backgroundRegion = gamePlayAtlas.findRegion(RegionNames.BACKGROUND);
-        animation = (GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("avoidobstacle/gameplay/blaidd.gif").read()));
     }
 
     // == public methods ==
@@ -114,13 +112,10 @@ public class GameRenderer implements Disposable {
     @Override
     public void dispose() {
         renderer.dispose();
-        batch.dispose();
     }
 
     // == private methods ==
     private void renderGamePlay() {
-//        elapsed += Gdx.graphics.getDeltaTime();
-//        batch.draw(animation.getKeyFrame(elapsed), 0f, 0f, GameConfig.WORLD_WIDTH, GameConfig.WORLD_HEIGHT);
         viewport.apply();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();

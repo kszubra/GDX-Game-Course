@@ -4,25 +4,25 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.utils.Logger;
 import com.gdx.game.course.avoidobstacle.ObstacleAvoidGame;
-import com.gdx.game.course.avoidobstacle.assets.AssetDescriptors;
 import com.gdx.game.course.avoidobstacle.screen.menu.MenuScreen;
 
 public class GameScreen implements Screen {
+
     private static final Logger log = new Logger(GameScreen.class.getName(), Logger.DEBUG);
+
+    private final ObstacleAvoidGame game;
     private final AssetManager assetManager;
 
     private GameController controller;
     private GameRenderer renderer;
 
-    private final ObstacleAvoidGame game;
-
     public GameScreen(ObstacleAvoidGame game) {
-        this.assetManager = game.getAssetManager();
         this.game = game;
+        assetManager = game.getAssetManager();
     }
 
     @Override
-    public void show() { //like create(), used to initiate game and load resources
+    public void show() {
         log.debug("show()");
         controller = new GameController(game);
         renderer = new GameRenderer(game.getBatch(), assetManager, controller);
@@ -34,7 +34,6 @@ public class GameScreen implements Screen {
         renderer.render(delta);
 
         if (controller.isGameOver()) {
-            log.debug("Game is over, going to menu screen");
             game.setScreen(new MenuScreen(game));
         }
     }
@@ -58,7 +57,7 @@ public class GameScreen implements Screen {
     public void hide() {
         log.debug("hide");
         dispose();
-    } //when hiding screen, for example changing between screens like game and menu
+    }
 
     @Override
     public void dispose() {
